@@ -2,7 +2,7 @@ import requests
 import argparse
 import re
 
-keys1=[r'.*cod.*', r'.*计算机.*', '.*Computer.*']  #第一个关键字列表
+keys1=[r'.*cod.*', r'.*计算机.*', r'.*Computer.*']  #第一个关键字列表
 keys2=[r'.*paper.*', r'.*试卷.*', r'.*exam.*', r'.*test.*', r'.*试题.*']  #第二个关键字列表
 search='ustc' #这里放搜索关键词
 parser = argparse.ArgumentParser(description='Ustc-course Spyder')
