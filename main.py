@@ -1,6 +1,8 @@
 import requests
 import argparse
-keys=[hw?.pdf] #这里放文件名中要有的关键字
+import re
+
+keys=[r'*cod*paper*', r'*计算机组成原理*试卷*', r'*paper*cod*', r'*试卷*计算机组成原理*']  #这里放文件名中要有的关键字
 search='ustc' #这里放搜索关键字
 parser = argparse.ArgumentParser(description='Ustc-course Spyder')
 parser.add_argument('token', help='token for your github account', type=str)
@@ -24,7 +26,7 @@ for page in range(1,11):
         for file in content.json()["tree"]:
             files+=file['path'].lower()
         for key in keys:
-            if key in files:
+            if re.search(key, files, re.IGNORECASE):
                 url_list.append('https://github.com/'+full_name)
 for url in url_list:
     print(url)
