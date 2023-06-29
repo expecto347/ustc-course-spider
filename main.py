@@ -2,7 +2,7 @@ import requests
 import argparse
 import re
 
-keys=[r'*cod*paper*', r'*计算机组成原理*试卷*', r'*paper*cod*', r'*试卷*计算机组成原理*', r'*cod*试卷*', r'*计算机组成原理*paper*']  #这里放文件名中要有的关键字
+keys=[r'.*cod.*paper.*', r'.*计算机组成原理.*试卷.*', r'.*paper.*cod.*', r'.*试卷.*计算机组成原理.*', r'.*cod.*试卷.*', r'.*计算机组成原理.*paper.*']  #这里放文件名中要有的关键字
 search='ustc' #这里放搜索关键字
 parser = argparse.ArgumentParser(description='Ustc-course Spyder')
 parser.add_argument('token', help='token for your github account', type=str)
