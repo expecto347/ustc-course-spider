@@ -2,8 +2,9 @@ import requests
 import argparse
 import re
 
-keys=[r'.*cod.*paper.*', r'.*计算机组成原理.*试卷.*', r'.*paper.*cod.*', r'.*试卷.*计算机组成原理.*', r'.*cod.*试卷.*', r'.*计算机组成原理.*paper.*']  #这里放文件名中要有的关键字
-search='ustc' #这里放搜索关键字
+keys1=[r'.*cod.*', r'.*计算机.*', '.*Computer.*']  #第一个关键字列表
+keys2=[r'.*paper.*', r'.*试卷.*', r'.*exam.*', r'.*test.*', r'.*试题.*']  #第二个关键字列表
+search='ustc' #这里放搜索关键词
 parser = argparse.ArgumentParser(description='Ustc-course Spyder')
 parser.add_argument('token', help='token for your github account', type=str)
 args = parser.parse_args()
@@ -25,8 +26,7 @@ for page in range(1,11):
         files=full_name.lower()
         for file in content.json()["tree"]:
             files+=file['path'].lower()
-        for key in keys:
-            if re.search(key, files, re.IGNORECASE):
-                url_list.append('https://github.com/'+full_name)
-for url in url_list:
-    print(url)
+        match_keys1 = any(re.search(key, files, re.IGNORECASE) for key in keys1)
+        match_keys2 = any(re.search(key, files, re.IGNORECASE) for key in keys2)
+        if match_keys1 and match_keys2:
+            print('https://github.com/'+full_name)
